@@ -7,6 +7,7 @@
 }
 
 :root {
+    --color-bg: #f3f3f3;
     --color-light: #fff;
     --color-dark: #222;
     --color-black: black;
@@ -22,7 +23,7 @@
 body {
     width: 100%;
     height: 100vh;
-    background: var(--color-light);
+    background: var(--color-bg);
 }
 
 header {
@@ -56,12 +57,15 @@ header {
     width: 100%;
     height: 700px;
     background: url("https://www.intechnic.com/hubfs/Blog/Featured%20Images/12%20Best%20Hospital%20and%20Healthcare%20Websites.jpg") no-repeat top left/cover;
+    display: flex;
+    text-align: justify;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-content {
     width: 100%;
     height: 600px;
-    background: white;
 }
 
 .menu2 {
@@ -138,4 +142,102 @@ header {
 .Register>button:hover {
     background: var(--color-primary);
     border: 2px solid transparent;
+}
+.header-main-content{
+    width: 80%;
+    margin: calc(var(--margin-primary) / 2) auto;
+}
+.header-main-content > h1{
+    padding: calc(var(--padding-primary) / 3) calc(var(--padding-primary) / 2);
+    color: var(--color-primary);
+    font-weight: var(--font-bold-primary);
+    background: var(--color-light);
+    border-radius: 4px;
+    width: 28%;
+    text-align: center;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.08);
+}
+.main-content-diabetes{
+    width: 80%;
+    margin: calc(var(--margin-primary) / 2) auto;
+}
+.main-content-diabetes > h3 {
+    color: var(--color-secondary);
+    font-size: 18px;
+    font-weight: calc(var(--font-bold-primary) - 200);
+    width: 80%;
+    margin: 10px auto;
+    font-style: italic;
+}
+.main-content-diabetes > .p{
+    font-size: 16px;
+    width: 80%;
+    text-align: justify;
+    margin: 10px auto;
+    padding-left: 10px;
+    border-left: 2px solid var(--color-primary);
+}
+.main-content-diabetes > .pU {
+    font-size: 16px;
+    width: 80%;
+    text-align: justify;
+    margin: 10px auto;
+    padding-left: 10px;
+    border-left: 2px solid var(--color-primary);
+}
+.main-content-diabetes > .p:first-letter{
+    font-size: 40px;
+    font-weight: var(--font-bold-primary);
+    color: var(--color-primary);
+    letter-spacing: 2px;
+}
+.main-content-diabetes > .pU > em{
+    color: var(--color-primary);
+}
+.main-text{
+    width: 70%;
+    margin: 0 auto;
+    padding: var(--color-primary);
+}
+.main-text > h1{
+    color: var(--color-primary);
+    font-size: 50px;
+    font-weight: var(--font-bold-primary);
+    width: 80%;
+    margin: 0 auto;
+}
+.main-text > h2{
+    color: var(--color-light);
+    font-size: 25px;
+    font-weight: calc(var(--font-bold-primary) - 200);
+    width: 70%;
+    margin: 0 auto;
+    padding: calc(var(--padding-primary) / 3);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.41);
+}
+.main-text > h2 > i{
+    color: var(--color-secondary);
+}
+.main-text > div > a {
+    text-decoration: none;
+    padding: calc(var(--padding-primary) /4) calc(var(--padding-primary) /2);
+    background: var(--color-primary);
+    border: 2px solid transparent;
+    color: var(--color-light);
+    border-radius: calc(var(--borderRaduis-primary) /4);
+    font-weight:calc(var(--font-bold-primary) - 200) ;
+    transition: .6s;
+    cursor: pointer;
+    margin: 15px 10px;
+}
+.main-text > div > a:hover{
+    background: #11a0b8;
+    border: 2px solid transparent;
+    color: var(--color-light);
+}
+.main-text > div{
+    width: 70%;
+    margin: 0 auto;
 }

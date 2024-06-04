@@ -25,4 +25,15 @@ public class DiabetesServiceImp implements DiabetesService{
     public ArrayList<Diabetes> getDiabetes() {
         return (ArrayList<Diabetes>) userRepository.findAll();
     }
+
+    @Override
+    public void delete(int id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Diabetes student) {
+
+    }
+
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface DiabetesService {
     void save(Diabetes student);
     ArrayList<Diabetes> getDiabetes();
+    void delete(int id);
+    void update(Diabetes student);
 }
