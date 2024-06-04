@@ -1,21 +1,40 @@
 package com.Beans;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "ropa")
 public class Ropa {
-    public Ropa(int id, int user_id, String ropa_name) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "user_id", nullable = false)
+    private int userId;
+
+    @Column(name = "ropa_name", nullable = false)
+    private String ropaName;
+
+    @OneToMany(mappedBy = "ropa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RopaProduct> ropaProducts;
+
+    // Constructors, getters, and setters
+
+    public Ropa(int id, int userId, String ropaName) {
         this.id = id;
-        this.user_id = user_id;
-        this.ropa_name = ropa_name;
-    }
-    public Ropa( int user_id, String ropa_name) {
-        this.user_id = user_id;
-        this.ropa_name = ropa_name;
-    }
-    public Ropa() {
+        this.userId = userId;
+        this.ropaName = ropaName;
     }
 
-    private int id;
-    private int user_id;
-    private String ropa_name;
+    public Ropa(int userId, String ropaName) {
+        this.userId = userId;
+        this.ropaName = ropaName;
+    }
+
+    public Ropa() {
+    }
 
     public int getId() {
         return id;
@@ -25,20 +44,27 @@ public class Ropa {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-
-    public String getRopa_name() {
-        return ropa_name;
+    public String getRopaName() {
+        return ropaName;
     }
 
-    public void setRopa_name(String ropa_name) {
-        this.ropa_name = ropa_name;
+    public void setRopaName(String ropaName) {
+        this.ropaName = ropaName;
+    }
+
+    public Set<RopaProduct> getRopaProducts() {
+        return ropaProducts;
+    }
+
+    public void setRopaProducts(Set<RopaProduct> ropaProducts) {
+        this.ropaProducts = ropaProducts;
     }
 }

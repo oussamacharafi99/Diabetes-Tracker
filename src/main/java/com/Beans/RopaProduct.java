@@ -1,11 +1,21 @@
 package com.Beans;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ropa_product")
 public class RopaProduct {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "ropa_id")
     private Ropa ropa;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
 

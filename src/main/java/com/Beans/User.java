@@ -1,6 +1,24 @@
 package com.Beans;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
     public User(int id, String name, String password, String email) {
         this.id = id;
         this.name = name;
@@ -13,14 +31,9 @@ public class User {
         this.password = password;
         this.email = email;
     }
+
     public User() {
     }
-
-    private int id;
-    private String name;
-    private String password;
-    private String email;
-
 
     public int getId() {
         return id;

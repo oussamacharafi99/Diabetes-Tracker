@@ -1,6 +1,35 @@
 package com.Beans;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "product")
 public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "image", nullable = false)
+    private String image;
+
+    @Column(name = "poid", nullable = false)
+    private double poid;
+
+    @Column(name = "calories", nullable = false)
+    private int calories;
+    @Column(name = "type", nullable = false)
+    private String type;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RopaProduct> ropaProducts;
+
+    // Constructors, getters, and setters
+
     public Product(int id, String name, String image, double poid, int calories) {
         this.id = id;
         this.name = name;
@@ -8,20 +37,16 @@ public class Product {
         this.poid = poid;
         this.calories = calories;
     }
-    public Product( String name, String image, double poid, int calories) {
+
+    public Product(String name, String image, double poid, int calories) {
         this.name = name;
         this.image = image;
         this.poid = poid;
         this.calories = calories;
     }
+
     public Product() {
     }
-
-    private int id;
-    private String name;
-    private String image;
-    private double poid;
-    private int calories;
 
     public int getId() {
         return id;
@@ -61,5 +86,21 @@ public class Product {
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public Set<RopaProduct> getRopaProducts() {
+        return ropaProducts;
+    }
+
+    public void setRopaProducts(Set<RopaProduct> ropaProducts) {
+        this.ropaProducts = ropaProducts;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
