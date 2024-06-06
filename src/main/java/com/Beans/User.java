@@ -13,21 +13,26 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "age")
+    private int age;
 
     @Column(name = "email")
     private String email;
 
-    public User(int id, String name, String password, String email) {
+    @Column(name = "password")
+    private String password;
+
+    public User(int id, String name, int age,  String password, String email) {
         this.id = id;
         this.name = name;
+        this.age = age;
         this.password = password;
         this.email = email;
     }
 
-    public User(String name, String password, String email) {
+    public User(String name,int age, String password, String email) {
         this.name = name;
+        this.age = age;
         this.password = password;
         this.email = email;
     }
@@ -49,6 +54,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getPassword() {

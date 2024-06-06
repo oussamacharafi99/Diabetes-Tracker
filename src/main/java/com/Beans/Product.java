@@ -14,14 +14,12 @@ public class Product {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "image", nullable = false)
-    private String image;
-
-    @Column(name = "poid", nullable = false)
+    @Column(name = "serving", nullable = false)
     private double poid;
 
     @Column(name = "calories", nullable = false)
     private int calories;
+
     @Column(name = "type", nullable = false)
     private String type;
 
@@ -30,17 +28,15 @@ public class Product {
 
     // Constructors, getters, and setters
 
-    public Product(int id, String name, String image, double poid, int calories) {
+    public Product(int id, String name, double poid, int calories) {
         this.id = id;
         this.name = name;
-        this.image = image;
         this.poid = poid;
         this.calories = calories;
     }
 
-    public Product(String name, String image, double poid, int calories) {
+    public Product(String name, double poid, int calories) {
         this.name = name;
-        this.image = image;
         this.poid = poid;
         this.calories = calories;
     }
@@ -62,14 +58,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public double getPoid() {

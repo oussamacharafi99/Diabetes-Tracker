@@ -1,11 +1,10 @@
 package com.Repository;
-
-import com.Beans.Diabetes;
+import com.Beans.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<Diabetes, Integer> {
+public interface ProductRepository extends JpaRepository<Product, String> {
 
 }
