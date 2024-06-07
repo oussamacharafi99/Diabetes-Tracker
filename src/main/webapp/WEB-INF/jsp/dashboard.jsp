@@ -41,22 +41,11 @@
         <h2>oussama charafi</h2>
     </div>
     <div class="menu-container">
-
-        <div class="add item">
             <h2><span>Add The Result</span><i class="bi bi-plus-square"></i></h2>
-        </div>
-        <div class="ropa item">
             <h2><span>Add a meal</span><i class="bi bi-patch-plus"></i></h2>
-        </div>
-        <div class="histories item">
             <h2><span>All Result</span><i class="bi bi-card-heading"></i></h2>
-        </div>
-        <div class="graphique item">
             <h2><span>Result graph</span><i class="bi bi-graph-down"></i></h2>
-        </div>
-        <div class="Consiele item">
             <h2><span>Tips</span><i class="bi bi-arrow-up-right-circle-fill"></i></h2>
-        </div>
     </div>
 </section>
 <section class="main">
@@ -64,37 +53,50 @@
 
     </div>
     <div class="home">
-        <h1>Add The Result</h1>
         <div class="home-wrapper">
-            <form action="saveDiabetes" method="POST" class="mt-4">
-                <div class="form-group" style="display: none">
-                    <label for="userId">User ID:</label>
-                    <input type="number" class="form-control" id="userId" name="userId" value="1">
+            <div class="home-left">
+                <form action="saveDiabetes" method="POST" class="mt-4">
+                    <h3>Graph of Last Result</h3>
+                    <div class="form-group" style="display: none">
+                        <label for="userId">User ID:</label>
+                        <input type="number" class="form-control" id="userId" name="userId" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label id="di" for="diabetes">Diabetes</label>
+                        <input type="text" class="form-control" id="diabetes" name="diabetes" required placeholder="Diabetes">
+                    </div>
+                    <div class="form-group">
+                        <label id="da" for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label id="ti" for="time">Time</label>
+                        <input type="time" class="form-control" id="time" name="heurs" required readonly>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="addS">Add</button>
+                </form>
+                <br>
+                <div class="result-graph">
+                    <h3>Graph of Last Result</h3>
+                    <canvas id="myChart"></canvas><br>
                 </div>
-                <div class="form-group">
-                    <label id="di" for="diabetes">Diabetes</label>
-                    <input type="text" class="form-control" id="diabetes" name="diabetes" required placeholder="Diabetes">
-                </div>
-                <div class="form-group">
-                    <label id="da" for="date">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label id="ti" for="time">Time</label>
-                    <input type="time" class="form-control" id="time" name="heurs" required>
-                </div>
-                <button type="submit" class="btn btn-primary" id="addS">Add</button>
-            </form>
-
+            </div>
             <div class="last-day">
-                <h3>Graph of Last Result</h3>
-                <canvas id="myChart"></canvas>
+                <div class="result-text">
+                    <h3>Result</h3>
+                    <h2 id="title-diabetes">Normal (< 5.7%)</h2>
+                    <p><span>--> </span><span id="description-diabetes"> Niveau de sucre élevé, confirmant un diagnostic de diabète. Nécessite une prise en charge médicale immédiate..</span></p>
+                    <p><span>--> </span><span id="consiele-diabetes"> Consultez un professionnel de la santé pour un plan de traitement adapté. Suivez les recommandations diététiques et médicamenteuses pour gérer votre glycémie.</span></p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    var currentTime = new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' });
+    document.getElementById('time').value = currentTime;
+
     function toggleFullscreen() {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen().catch(err => {
@@ -104,29 +106,96 @@
             document.exitFullscreen();
         }
     }
+
+    const diabeteOne = 5.8;  // Replace this with your actual value
+
     const data = {
         labels: ['Not Normal', 'Normal', 'Your Result', 'Good'],
-        datasets: [{
-            label: 'Diabetes Result (HbA1c)',
-            data: [6.5, 5.5,${diabeteOne}, 6.0],  // Example HbA1c values
-            backgroundColor: [
-                'rgb(255, 99, 132)',  // Not Normal (HbA1c 6.5% or higher)
-                'rgb(75, 192, 192)',  // Normal (HbA1c below 5.7%)
-                'rgb(255, 205, 86)',  // Your Result (Example value)
-                'rgb(54, 162, 235)'   // Good (HbA1c around 6.0%)
-            ]
-        }]
+        datasets: [
+            {
+                label: 'Not Normal',
+                data: [6.5, null, null, null],  // Only the first value is valid
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: false,
+                tension: 0.1,
+                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBorderColor: 'rgb(255, 99, 132)',
+                pointRadius: 5,
+                showLine: false  // Do not draw line, only points
+            },
+            {
+                label: 'Normal',
+                data: [null, 5.5, null, null],  // Only the second value is valid
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+                tension: 0.1,
+                pointBackgroundColor: 'rgb(75, 192, 192)',
+                pointBorderColor: 'rgb(75, 192, 192)',
+                pointRadius: 5,
+                showLine: false  // Do not draw line, only points
+            },
+            {
+                label: 'Your Result',
+                data: [null, null, ${diabeteOne}, null],  // Only the third value is valid
+                borderColor: 'rgb(255, 205, 86)',
+                backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                fill: false,
+                tension: 0.1,
+                pointBackgroundColor: 'rgb(255, 205, 86)',
+                pointBorderColor: 'rgb(255, 205, 86)',
+                pointRadius: 5,
+                showLine: false  // Do not draw line, only points
+            },
+            {
+                label: 'Good',
+                data: [null, null, null, 6.0],  // Only the fourth value is valid
+                borderColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: false,
+                tension: 0.1,
+                pointBackgroundColor: 'rgb(54, 162, 235)',
+                pointBorderColor: 'rgb(54, 162, 235)',
+                pointRadius: 5,
+                showLine: false  // Do not draw line, only points
+            }
+        ]
     };
+
     const config = {
-        type: 'polarArea',
+        type: 'line',
         data: data,
-        options: {}
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
     };
 
     window.onload = function() {
         const ctx = document.getElementById('myChart').getContext('2d');
         new Chart(ctx, config);
     };
+
+    ///
+    let addB = document.getElementById("addS");
+    let date = document.getElementById("date");
+    let timee = document.getElementById("time");
+    let diabetes = document.getElementById("diabetes");
+
+    addB.addEventListener("click" , ()=>{
+        if (diabetes.value === "" || date.value === "" || timee.value === ""){
+            diabetes.style.border = "2px solid red";
+            date.style.border = "2px solid red";
+            timee.style.border = "2px solid red";
+        }
+        else{
+            alert("the diabetes result add with success");
+        }
+    })
 
 </script>
 <script src="js.js"></script>
