@@ -1,5 +1,6 @@
 package com.servlets;
 
+import com.Beans.Diabetes;
 import com.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,4 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/dd" )
-    public String showProduct(Model model) {
-        return "dashboard";
-    }
 }
