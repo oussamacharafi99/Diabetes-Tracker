@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DiabetesServiceImp{
@@ -40,6 +39,10 @@ public class DiabetesServiceImp{
     @Transactional
     public Diabetes getLastDiabetesRecord() {
         return diabetesRepository.findAll().get(diabetesRepository.findAll().size() - 1);
+    }
+    @Transactional
+    public List<Diabetes> searchByDate(LocalDate date) {
+        return diabetesRepository.findByDate(date);
     }
 
 }
