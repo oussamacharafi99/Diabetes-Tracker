@@ -47,7 +47,7 @@
         <h2 class="btnScroll" onclick="scrolling(550, '#4facfe', '#FFF')">
             <span>All Result</span><i class="bi bi-card-heading"></i>
         </h2>
-        <h2 class="btnScroll" onclick="scrolling(1000, '#4facfe', '#FFF')">
+        <h2 class="btnScroll" onclick="scrolling(1200, '#4facfe', '#FFF')">
             <span>Result graph</span><i class="bi bi-graph-down"></i>
         </h2>
         <h2 class="btnScroll"><span>Add a meal</span><i class="bi bi-patch-plus"></i></h2>
@@ -354,7 +354,7 @@
                     label: 'Valeur Glycemie',
                     data: dataG,
                     borderColor: 'rgb(0,192,236)',
-                    backgroundColor: 'rgb(0,192,236)',
+                    backgroundColor: 'rgba(0,192,236,0.54)',
                 }
             ]
         };
