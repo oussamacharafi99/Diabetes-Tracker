@@ -95,8 +95,11 @@
             <div class="result-home-wrapper">
                 <h2>Previous results</h2>
                 <form action="search" method="POST" class="search-result">
-                    <input type="date" name="search" id="search" placeholder="yyyy-MM-dd" pattern="\d{4}-\d{2}-\d{2}"/>
-                    <button type="submit" id="Sear">Search</button>
+                    <div class="groupSearch">
+                        <input type="date" name="search" id="search" placeholder="yyyy-MM-dd" pattern="\d{4}-\d{2}-\d{2}"/>
+                        <button type="submit" id="Sear"><i class="bi bi-search"></i></button>
+                    </div>
+                    <a class="btnReload" href="${pageContext.request.contextPath}"><i class="bi bi-arrow-clockwise"></i></a>
                 </form>
                 <div class="table-result">
                     <table>
