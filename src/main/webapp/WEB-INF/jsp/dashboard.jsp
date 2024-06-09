@@ -144,12 +144,21 @@
                 </div>
             </div>
         </div>
+        <!-- part three-->
+        <div class="chart-home">
+            <div class="chart-home-wrapper">
+                <h2>Chart Of All results</h2>
+                <div class="chart-container"><canvas id="chart-1"></canvas>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 <p id="rt" style="display:none;">${diabeteOne}</p>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var currentTime = new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' });
+    var currentTime = new Date().toLocaleTimeString([], {hour12: false, hour: '2-digit', minute: '2-digit'});
     document.getElementById('time').value = currentTime;
 
     function toggleFullscreen() {
@@ -230,7 +239,7 @@
         }
     };
 
-    window.onload = function() {
+    window.onload = function () {
         const ctx = document.getElementById('myChart').getContext('2d');
         new Chart(ctx, config);
     };
@@ -242,15 +251,14 @@
     let diabetes = document.getElementById("diabetes");
     const form_group = document.querySelectorAll(".form-group");
 
-    addB.addEventListener("click" , ()=>{
-        if (diabetes.value === "" || date.value === "" || timee.value === ""){
+    addB.addEventListener("click", () => {
+        if (diabetes.value === "" || date.value === "" || timee.value === "") {
             form_group.forEach(form => {
                 form.style.border = "2px solid red";
                 form.style.border = "2px solid red";
                 form.style.border = "2px solid red";
             })
-        }
-        else{
+        } else {
             alert("the diabetes result add with success");
         }
     })
@@ -274,17 +282,15 @@
     const consiele_diabetes = document.getElementById("consiele-diabetes");
     const description_diabetes = document.getElementById("description-diabetes");
 
-    if(rt <= 5.7){
+    if (rt <= 5.7) {
         title_diabetes.innerHTML = ArrayTitles[0];
         consiele_diabetes.innerHTML = ArrayConseils[0];
         description_diabetes.innerHTML = ArrayDescriptions[0];
-    }
-    else if(rt > 5.7 && rt < 6.5){
+    } else if (rt > 5.7 && rt < 6.5) {
         title_diabetes.innerHTML = ArrayTitles[1];
         consiele_diabetes.innerHTML = ArrayConseils[1];
         description_diabetes.innerHTML = ArrayDescriptions[1];
-    }
-    else if(rt >= 6.5){
+    } else if (rt >= 6.5) {
         title_diabetes.innerHTML = ArrayTitles[2];
         consiele_diabetes.innerHTML = ArrayConseils[2];
         description_diabetes.innerHTML = ArrayDescriptions[2];
@@ -313,7 +319,7 @@
     function scrolling(value1, value2, value3) {
         const projectView = document.querySelector('.home');
         const buttons = document.querySelectorAll('.btnScroll');
-        projectView.scrollTo({ top: value1, behavior: 'smooth' });
+        projectView.scrollTo({top: value1, behavior: 'smooth'});
         buttons.forEach(button => {
             button.style.transition = '0.6s';
             button.style.background = '#FFF';
@@ -324,12 +330,59 @@
         clickedButton.style.color = value3;
     }
 
-    setInterval(()=>{
+    setInterval(() => {
         location.reload();
-    },60000)
+    }, 60000)
+
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const labels = [
+            <c:forEach var="gl" items="${allDiabetes}" varStatus="status">
+            "${gl.date}"<c:if test="${!status.last}">, </c:if>
+            </c:forEach>
+        ];
+        const dataG = [
+            <c:forEach var="gl" items="${allDiabetes}" varStatus="status">
+            ${gl.diabetes}<c:if test="${!status.last}">, </c:if>
+            </c:forEach>
+        ];
+
+
+        const data = {
+            labels: labels, datasets: [
+                {
+                    label: 'Valeur Glycemie',
+                    data: dataG,
+                    borderColor: 'rgb(0,192,236)',
+                    backgroundColor: 'rgb(0,192,236)',
+                }
+            ]
+        };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Glycemie Levels Over Time'
+                    }
+                }
+            },
+        };
+
+        const ctx = document.getElementById('chart-1').getContext('2d');
+        new Chart(ctx, config);
+    });
 
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js.js"></script>
 </body>
 </html>
