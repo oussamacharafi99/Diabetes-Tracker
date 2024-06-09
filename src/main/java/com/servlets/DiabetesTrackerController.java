@@ -26,7 +26,7 @@ public class DiabetesTrackerController {
 //    public String showdata() {
 //        return "add";
 //    }
-    @RequestMapping(value = "/home" )
+    @RequestMapping(value = "/" )
     public String home(Model model) {
         return "home";
     }
@@ -42,7 +42,7 @@ public class DiabetesTrackerController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/" )
+    @RequestMapping(value = "/dashboard" )
     public String addd(Model model) {
         model.addAttribute("diabetes",new Diabetes());
         model.addAttribute("diabeteOne",diabetesService.getLastDiabetesRecord().getDiabetes());

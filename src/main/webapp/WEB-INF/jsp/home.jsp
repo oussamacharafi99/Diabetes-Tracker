@@ -47,7 +47,7 @@
         </ul>
     </div>
     <div class="Register">
-        <button>Register</button>
+        <button><a href="dashboard">dashboard</a></button>
     </div>
 </section>
 
@@ -55,8 +55,6 @@
     <div class="main-text">
         <h1>Diabetes is not a stopping point !</h1>
         <h2> You can use <i>our website</i> to track my condition every day with the ability to choose the meals that are appropriate <i>for you</i>
-        <br>
-            <a?
         </h2>
     </div>
 </section>

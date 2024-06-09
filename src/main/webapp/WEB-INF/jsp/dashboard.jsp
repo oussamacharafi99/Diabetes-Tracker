@@ -28,7 +28,7 @@
             <li class="full-screen-link"  onclick="toggleFullscreen()"><i class="bi bi-fullscreen"></i></li>
             <li><a href="#"><i class="bi bi-envelope"></i></a></li>
             <li><a href="#"><i class="bi bi-bell"></i></a></li>
-            <li><a href="#"><i class="bi bi-power"></i></a></li>
+            <li><a href="${pageContext.request.contextPath}"><i class="bi bi-power"></i></a></li>
         </ul>
     </div>
 </header>

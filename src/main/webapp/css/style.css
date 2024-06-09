@@ -128,6 +128,10 @@ header {
     align-items: center;
     justify-content: center;
 }
+.Register > a {
+    text-decoration: none;
+    color: white;
+}
 .Register>button {
     padding: calc(var(--padding-primary) /4) calc(var(--padding-primary) /2);
     margin: 0 auto;
