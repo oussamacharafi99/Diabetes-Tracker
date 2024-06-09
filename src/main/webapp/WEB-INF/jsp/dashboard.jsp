@@ -26,7 +26,7 @@
     <div class="header-content">
         <ul>
             <li class="full-screen-link"  onclick="toggleFullscreen()"><i class="bi bi-fullscreen"></i></li>
-            <li><a href="#"><i class="bi bi-envelope"></i></i></a></li>
+            <li><a href="#"><i class="bi bi-envelope"></i></a></li>
             <li><a href="#"><i class="bi bi-bell"></i></a></li>
             <li><a href="#"><i class="bi bi-power"></i></a></li>
         </ul>
@@ -41,11 +41,17 @@
         <h2>oussama charafi</h2>
     </div>
     <div class="menu-container">
-            <h2 id="a1"><span>Add The Result</span><i class="bi bi-plus-square"></i></h2>
-            <h2><span>All Result</span><i class="bi bi-card-heading"></i></h2>
-            <h2><span>Result graph</span><i class="bi bi-graph-down"></i></h2>
-            <h2><span>Add a meal</span><i class="bi bi-patch-plus"></i></h2>
-            <h2><span>Tips</span><i class="bi bi-arrow-up-right-circle-fill"></i></h2>
+        <h2 id="a1" class="btnScroll" onclick="scrolling(0, '#4facfe', '#FFF')">
+            <span>Add The Result</span><i class="bi bi-plus-square"></i>
+        </h2>
+        <h2 class="btnScroll" onclick="scrolling(550, '#4facfe', '#FFF')">
+            <span>All Result</span><i class="bi bi-card-heading"></i>
+        </h2>
+        <h2 class="btnScroll" onclick="scrolling(1000, '#4facfe', '#FFF')">
+            <span>Result graph</span><i class="bi bi-graph-down"></i>
+        </h2>
+        <h2 class="btnScroll"><span>Add a meal</span><i class="bi bi-patch-plus"></i></h2>
+        <h2 class="btnScroll"><span>Tips</span><i class="bi bi-arrow-up-right-circle-fill"></i></h2>
     </div>
 </section>
 <section class="main">
@@ -75,6 +81,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary" id="addS">Add</button>
                 </form>
+                <br>
                 <br>
                 <div class="result-graph">
                     <h3>Graph of Last Result <em>${diabeteDate} , ${diabeteTime}</em></h3>
@@ -119,7 +126,7 @@
                                 <td>${diabete.getDate()}</td>
                                 <td>${diabete.getHeurs()}</td>
                                 <td class="status">Normal</td>
-                                <td><a href="deletDiabetes/${diabete.getId()}">Delete</a></td>
+                                <td ><a id="delete" href="deletDiabetes/${diabete.getId()}"><i class="bi bi-eraser-fill"></i></a></td>
                             </tr>
                         </c:forEach>
 
@@ -129,7 +136,7 @@
                                 <td>${diabeteS.getDate()}</td>
                                 <td>${diabeteS.getHeurs()}</td>
                                 <td class="status">Normal</td>
-                                <td><a href="#">Delete</a></td>
+                                <td><a id="delete" href="deletDiabetes/${diabete.getId()}"><i class="bi bi-eraser-fill"></i></a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -233,12 +240,15 @@
     let date = document.getElementById("date");
     let timee = document.getElementById("time");
     let diabetes = document.getElementById("diabetes");
+    const form_group = document.querySelectorAll(".form-group");
 
     addB.addEventListener("click" , ()=>{
         if (diabetes.value === "" || date.value === "" || timee.value === ""){
-            diabetes.style.border = "2px solid red";
-            date.style.border = "2px solid red";
-            timee.style.border = "2px solid red";
+            form_group.forEach(form => {
+                form.style.border = "2px solid red";
+                form.style.border = "2px solid red";
+                form.style.border = "2px solid red";
+            })
         }
         else{
             alert("the diabetes result add with success");
@@ -300,8 +310,23 @@
         }
     });
 
+    function scrolling(value1, value2, value3) {
+        const projectView = document.querySelector('.home');
+        const buttons = document.querySelectorAll('.btnScroll');
+        projectView.scrollTo({ top: value1, behavior: 'smooth' });
+        buttons.forEach(button => {
+            button.style.transition = '0.6s';
+            button.style.background = '#FFF';
+            button.style.color = '#4facfe';
+        });
+        const clickedButton = event.currentTarget;
+        clickedButton.style.background = value2;
+        clickedButton.style.color = value3;
+    }
 
-
+    setInterval(()=>{
+        location.reload();
+    },60000)
 
 
 </script>
